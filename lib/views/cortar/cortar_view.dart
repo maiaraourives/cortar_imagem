@@ -64,7 +64,8 @@ class _CortarViewState extends State<CortarView> {
 
   // img.Image? imageCroppedSix;
   // ui.Image? _partSix;
-  
+
+  ///TODO Foi testado e funciona está forma mas ainda a parte da linha não funcionou com a imagem
   late int height = image!.height; //Altura de cada imagem
   late int width = image!.width; //Largura de cada imagem
   late int coluna = 2;
@@ -131,17 +132,19 @@ class _CortarViewState extends State<CortarView> {
     // ByteData data = await rootBundle.load('assets/img/teste.png');
     // image = img.decodeImage(data.buffer.asUint8List())!;
 
+    /////TODO Os primeiro Y sempre são 0 e também os primeiros X
+
     //Recorta as imagem conforme for seu posiocionamento
     imageCroppedOne = img.copyCrop(image!, 0, 0, w, h);
-    //x+w
+    //x
     imageCroppedTwo = img.copyCrop(image!, x, 0, w, h);
-    //y+y
-    imageCroppedThree = img.copyCrop(image!, 0, y + y, w, h);
-    //y+y | x+x
-    imageCroppedFour = img.copyCrop(image!, x, y + y, w, h);
-    // //y+h+h
+    //y
+    imageCroppedThree = img.copyCrop(image!, 0, y, w, h);
+    //y | x
+    imageCroppedFour = img.copyCrop(image!, x, y, w, h);
+    // //y+y
     // imageCroppedFive = img.copyCrop(image!, 0, y + y, w, h);
-    // //y+h+h | x+x
+    // //y+y+y | x
     // imageCroppedSix = img.copyCrop(image!, x, y + y, w, h);
   }
 
