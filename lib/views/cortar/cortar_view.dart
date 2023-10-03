@@ -62,6 +62,7 @@ class _CortarViewState extends State<CortarView> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: const Text('Crop Image')),
       body: ListView(
@@ -69,6 +70,7 @@ class _CortarViewState extends State<CortarView> {
         children: [
           Row(
             children: [
+
               Expanded(
                 child: Form(
                   key: formKey,
@@ -105,7 +107,7 @@ class _CortarViewState extends State<CortarView> {
                   ),
                 ),
               ),
-              const SizedBox(width: 20),
+
               Column(
                 children: [
                   ElevatedButton(
@@ -124,7 +126,30 @@ class _CortarViewState extends State<CortarView> {
               ),
             ],
           ),
+          Text(cortar.colunas.toString()),
+
           const SizedBox(height: 50),
+
+          Container(
+            margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: stateView.partsImages.length,
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: size.width >= 600 ? 3 : 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: size.width >= 600 ? 2 / 1 : 1,
+              ),
+              itemBuilder: (_, index) {
+                // final partsImages = stateView.partsImages[index];
+                // final axisCount = cortar.colunas;
+
+                return null;
+              },
+            ),
+          ),
 
           //TODO exibir aqui as imagens cortadas. Utilizar GridView com axisCount = cortar.colunas
         ],

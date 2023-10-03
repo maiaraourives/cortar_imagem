@@ -41,11 +41,31 @@ class CropImageService {
   // }
 
   static Future<List<img.Image>> cropImage(int columns, int rows, XFile image) async {
+    
+    img.Image? imgs;
+
     //TODO pegar o tamanho total da imagem
+    int altura = imgs!.height; //Altura da imagem
+    int lagura = imgs.width; //Largura da imagem
+
+    int coluna = columns; //Número de colunas
+    int linha = rows; //Número de linha
+
     //TODO dividir o total da altura da imagem pela quantidade de linhas -> vai descobrir a altura de cada parte
+    int alturaCada = altura ~/ linha;
+
     //TODO dividir o total da largura pela quantidade de colunas -> vai descobrir a largura de cada parte
+    int laguraCada = lagura ~/ coluna;
 
     //TODO FOR para cortar as imagens
+
+    for(int i = 0; i < alturaCada; i++){
+      
+      for(int i = 0; i < laguraCada; i++){
+        imgs = img.copyCrop(image as img.Image, 0, 0, alturaCada, laguraCada);
+      }
+
+    }
 
     //retornar a lista
     return [];
