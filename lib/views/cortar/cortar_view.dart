@@ -41,7 +41,7 @@ class _CortarViewState extends State<CortarView> {
 
   bool _quebraCabeca = false;
   
-  File? _image;
+  File? imageGaleria;
   
   final picker = ImagePicker();
 
@@ -82,7 +82,7 @@ class _CortarViewState extends State<CortarView> {
 
     cortar = widget.cortar ?? CortarModel();
 
-    if (_image != null) {
+    if (imageGaleria != null) {
       loadingImage().then((value){
         imgImageTo(imageCroppedOne!).then((value){
           _partOne = value;
@@ -124,7 +124,7 @@ class _CortarViewState extends State<CortarView> {
 
   //Carrega as 'peças' da imagem e as recorta
   Future<void> loadingImage() async {
-    List<int> imageBase64 = _image!.readAsBytesSync();
+    List<int> imageBase64 = imageGaleria!.readAsBytesSync();
     String imageAsString = base64Encode(imageBase64);
     Uint8List uint8list = base64.decode(imageAsString);
     image = Image.memory(uint8list) as img.Image?;
@@ -144,7 +144,7 @@ class _CortarViewState extends State<CortarView> {
     imageCroppedFour = img.copyCrop(image!, x, y, w, h);
     // //y+y
     // imageCroppedFive = img.copyCrop(image!, 0, y + y, w, h);
-    // //y+y+y | x
+    // //y+y | x
     // imageCroppedSix = img.copyCrop(image!, x, y + y, w, h);
   }
 
@@ -172,7 +172,7 @@ class _CortarViewState extends State<CortarView> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        imageGaleria = File(pickedFile.path);
       }
     });
   }
@@ -224,9 +224,9 @@ class _CortarViewState extends State<CortarView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                 _quebraCabeca 
-                ? _image == null 
+                ? imageGaleria == null 
                 ? const Text('Nenhuma imagem selecionada para cortar') 
-                : Image.file(_image!) 
+                : Image.file(imageGaleria!) 
                 : _partOne == null 
                 ? const Text('Não foi realizado o quebra-cabeça') : 
                 Column(
@@ -250,7 +250,7 @@ class _CortarViewState extends State<CortarView> {
               mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    child: _image == null ? const Text('Nenhuma imagem selecionada') : Image.file(_image!),
+                    child: imageGaleria == null ? const Text('Nenhuma imagem selecionada') : Image.file(imageGaleria!),
                   ),
                 ],
               ),
