@@ -71,22 +71,30 @@ class CropImageService {
     //Teste
     for(int i = 1; i >= rows; i >= columns){
 
+      img.Image? teste;
+
       if(i >= columns){
         int x = 0 ~/ columns;
-      imgs = img.copyCrop(image as img.Image, x, alturaCada, laguraCada, alturaCada);
+        teste = img.copyCrop(image as img.Image, x, alturaCada, laguraCada, alturaCada);
       }
       
       if (i >= rows){
         int y = 0 ~/ rows;
-        imgs = img.copyCrop(image as img.Image, laguraCada, y, laguraCada, alturaCada);
+        teste = img.copyCrop(image as img.Image, laguraCada, y, laguraCada, alturaCada);
       }
-    }
-    
-    imgImageTo(imgs!).then((value){
-      parteImagem = value;
-    });
+      
+      imgImageTo(teste!).then((value){
+        parteImagem = value;
+      });
 
+    }
+
+    // imgImageTo(imgs!).then((value){
+    //   parteImagem = value;
+    // });
+
+    
     //retornar a lista
-    return [imgs];
+    return [imgs!];
   }
 }
