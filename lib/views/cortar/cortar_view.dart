@@ -118,7 +118,7 @@ class _CortarViewState extends State<CortarView> {
   }
 
   void _initialData() {
-    linhaController.text = cortar!.linhas ?? '';
+    linhaController.text = cortar!.linhas;
   }
 
   //Carrega as 'peças' da imagem e as recorta
@@ -305,7 +305,7 @@ class _CortarViewState extends State<CortarView> {
           Observer(
             builder: (_) {
               return Visibility(
-                visible: _quebraCabeca  == false,
+                visible: _quebraCabeca  == false && _showProcessed == true,
                 child: ElevatedButton(
                   onPressed: (){
                     setState(() {
