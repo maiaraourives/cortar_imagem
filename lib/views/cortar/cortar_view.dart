@@ -37,7 +37,7 @@ class _CortarViewState extends State<CortarView> {
   final colunaController = TextEditingController();
   final linhaController = TextEditingController();
 
-  bool _showProcessed = false;
+  bool _cortar = false;
 
   bool _quebraCabeca = false;
   
@@ -69,7 +69,7 @@ class _CortarViewState extends State<CortarView> {
   late int height = image!.height; //Altura de cada imagem
   late int width = image!.width; //Largura de cada imagem
   late int coluna = 2;
-  late int linha = cortar!.linhas.length;
+  late int linha = 2;
 
   late int h = height ~/ linha;
   late int y = height ~/ linha;
@@ -132,7 +132,7 @@ class _CortarViewState extends State<CortarView> {
     // ByteData data = await rootBundle.load('assets/img/teste.png');
     // image = img.decodeImage(data.buffer.asUint8List())!;
 
-    /////TODO Os primeiro Y sempre são 0 e também os primeiros X
+    //TODO Os primeiro Y sempre são 0 e também os primeiros X
 
     //Recorta as imagem conforme for seu posiocionamento
     imageCroppedOne = img.copyCrop(image!, 0, 0, w, h);
@@ -220,7 +220,7 @@ class _CortarViewState extends State<CortarView> {
           Center(
             child: Container(
               margin: const EdgeInsets.all(15),
-              child: _showProcessed ?   Column(
+              child: _cortar ?   Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                 _quebraCabeca 
@@ -260,7 +260,7 @@ class _CortarViewState extends State<CortarView> {
           Observer(
             builder: (_) {
               return Visibility(
-                visible: _showProcessed == false,
+                visible: _cortar == false,
                 child: ElevatedButton(
                   onPressed: showOptions,
                   child: const Text('Selecionar a imagem'),
@@ -272,12 +272,12 @@ class _CortarViewState extends State<CortarView> {
           Observer(
             builder: (_) {
               return Visibility(
-                visible: _showProcessed == false,
+                visible: _cortar == false,
                 child: ElevatedButton(
                   onPressed: (){
                     setState(() {
-                      if(_showProcessed == false){
-                      _showProcessed = true;
+                      if(_cortar == false){
+                      _cortar = true;
                       }
                     });
                   },
@@ -290,12 +290,12 @@ class _CortarViewState extends State<CortarView> {
           Observer(
             builder: (_) {
               return Visibility(
-                visible: _quebraCabeca == true && _showProcessed == true,
+                visible: _quebraCabeca == true && _cortar == true,
                 child: ElevatedButton(
                   onPressed: (){
                     setState(() {
-                      if(_showProcessed == true){
-                      _showProcessed = false;
+                      if(_cortar == true){
+                      _cortar = false;
                       }
                     });
                   },
@@ -308,7 +308,7 @@ class _CortarViewState extends State<CortarView> {
           Observer(
             builder: (_) {
               return Visibility(
-                visible: _quebraCabeca  == false && _showProcessed == true,
+                visible: _quebraCabeca  == false && _cortar == true,
                 child: ElevatedButton(
                   onPressed: (){
                     setState(() {
@@ -326,7 +326,7 @@ class _CortarViewState extends State<CortarView> {
           Observer(
             builder: (_) {
               return Visibility(
-                visible: _quebraCabeca == true && _showProcessed == true,
+                visible: _quebraCabeca == true && _cortar == true,
                 child: LabelTextForm(
                   label: 'Divisão de colunas e linhas:',
                   child: Container(
