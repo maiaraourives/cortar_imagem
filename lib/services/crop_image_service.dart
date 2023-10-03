@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 
 class CropImageService {
   //Coverte a imagem para ui
-  Future<ui.Image> imgImageTo(img.Image image) async {
+  static Future<ui.Image> imgImageTo(img.Image image) async {
     ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(image.getBytes(format: img.Format.rgba));
     ui.ImageDescriptor id = ui.ImageDescriptor.raw(buffer, height: image.height, width: image.width, pixelFormat: ui.PixelFormat.rgba8888);
     ui.Codec codec = await id.instantiateCodec(targetHeight: image.height, targetWidth: image.width);
@@ -14,60 +14,79 @@ class CropImageService {
     return part;
   }
 
-  // //Carrega as 'peças' da imagem e as recorta
-  // Future<void> loadingImage() async {
-  //   List<int> imageBase64 = imageGaleria!.readAsBytesSync();
-  //   String imageAsString = base64Encode(imageBase64);
-  //   Uint8List uint8list = base64.decode(imageAsString);
-  //   image = Image.memory(uint8list) as img.Image?;
-
-  //   // ByteData data = await rootBundle.load('assets/img/teste.png');
-  //   // image = img.decodeImage(data.buffer.asUint8List())!;
-
-  //   //TODO Os primeiro Y sempre são 0 e também os primeiros X
-
-  //   //Recorta as imagem conforme for seu posiocionamento
-  //   imageCroppedOne = img.copyCrop(image!, 0, 0, w, h);
-  //   //x
-  //   imageCroppedTwo = img.copyCrop(image!, x, 0, w, h);
-  //   //y
-  //   imageCroppedThree = img.copyCrop(image!, 0, y, w, h);
-  //   //y | x
-  //   imageCroppedFour = img.copyCrop(image!, x, y, w, h);
-  //   // //y+y
-  //   // imageCroppedFive = img.copyCrop(image!, 0, y + y, w, h);
-  //   // //y+y | x
-  //   // imageCroppedSix = img.copyCrop(image!, x, y + y, w, h);
-  // }
-
   static Future<List<img.Image>> cropImage(int columns, int rows, XFile image) async {
-    
+
     img.Image? imgs;
+
+    late ui.Image parteImagem;
 
     //TODO pegar o tamanho total da imagem
     int altura = imgs!.height; //Altura da imagem
     int lagura = imgs.width; //Largura da imagem
 
-    int coluna = columns; //Número de colunas
-    int linha = rows; //Número de linha
-
     //TODO dividir o total da altura da imagem pela quantidade de linhas -> vai descobrir a altura de cada parte
-    int alturaCada = altura ~/ linha;
+    int alturaCada = altura ~/ rows;
 
     //TODO dividir o total da largura pela quantidade de colunas -> vai descobrir a largura de cada parte
-    int laguraCada = lagura ~/ coluna;
+    int laguraCada = lagura ~/ columns;
 
     //TODO FOR para cortar as imagens
 
-    for(int i = 0; i < alturaCada; i++){
-      
-      for(int i = 0; i < laguraCada; i++){
-        imgs = img.copyCrop(image as img.Image, 0, 0, alturaCada, laguraCada);
-      }
-
+    //Quando for a primeira será Y e X sempre zero
+    for(int i = 1; i >= rows; i >= columns){
+      int x = 0 ~/ columns;
+      int y = 0 ~/ rows;
+      imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+    }
+    
+    //Quando for a primeira linha será Y sempre zero
+    for(int i = 1; i >= rows; i < columns){
+      int x = lagura ~/ columns;
+      int y = 0 ~/ rows; 
+      imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+    //Quando for depois da primeira Y e X terão valores, sendo o Y o único que pode aumentar
+    for(int i = 1; i < rows; i < columns){
+      int x = lagura ~/ columns;
+      if (i < rows){
+        late final int y;
+        y = alturaCada + i;
+        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+      }
+    }
+
+    //Quando for a primeira coluna será X sempre zero, sendo o Y o único que pode aumentar
+    for(int i = 1; i < rows; i >= columns){
+      int x = 0 ~/ columns;
+      if (i < rows){
+        late final int y;
+        y = alturaCada + i;
+        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+      }
+    }
+
+    //Teste
+    for(int i = 1; i >= rows; i >= columns){
+
+      if(i >= columns){
+        int x = 0 ~/ columns;
+      imgs = img.copyCrop(image as img.Image, x, alturaCada, laguraCada, alturaCada);
+      }
+      
+      if (i >= rows){
+        int y = 0 ~/ rows;
+        imgs = img.copyCrop(image as img.Image, laguraCada, y, laguraCada, alturaCada);
+      }
+    }
+    
+    imgImageTo(imgs!).then((value){
+      parteImagem = value;
+    });
+
     //retornar a lista
-    return [];
+    return [imgs];
   }
 }

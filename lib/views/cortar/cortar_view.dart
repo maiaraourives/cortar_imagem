@@ -1,3 +1,4 @@
+// import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -62,7 +63,29 @@ class _CortarViewState extends State<CortarView> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+
+    // final partsImages = stateView.partsImages;
+
+    List<Widget> children = [];
+    
+    // for (int i = 0; i < partsImages.length; i += 2) {
+    //   if (i < partsImages.length - 1) {
+    //     ui.Image? parte1;
+    //     ui.Image? parte2;
+
+    //     parte1 = partsImages;
+    //     parte2 = partsImages;
+        
+    //     children.add(Row(
+    //       mainAxisSize: MainAxisSize.min,
+    //       children: [
+    //         RawImage(image: parte1),
+    //         RawImage(image: parte2),
+    //       ],
+    //     ));
+    //   }
+    // }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Crop Image')),
       body: ListView(
@@ -126,10 +149,11 @@ class _CortarViewState extends State<CortarView> {
               ),
             ],
           ),
-          Text(cortar.colunas.toString()),
 
           const SizedBox(height: 50),
 
+          //TODO exibir aqui as imagens cortadas. Utilizar GridView com axisCount = cortar.colunas
+          
           Container(
             margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
             child: GridView.builder(
@@ -137,21 +161,19 @@ class _CortarViewState extends State<CortarView> {
               itemCount: stateView.partsImages.length,
               physics: const BouncingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: size.width >= 600 ? 3 : 2,
+                crossAxisCount: cortar.colunas!,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: size.width >= 600 ? 2 / 1 : 1,
               ),
               itemBuilder: (_, index) {
                 // final partsImages = stateView.partsImages[index];
-                // final axisCount = cortar.colunas;
-
-                return null;
+                
+                return Column(
+                  children: children,
+                );
               },
             ),
-          ),
-
-          //TODO exibir aqui as imagens cortadas. Utilizar GridView com axisCount = cortar.colunas
+          ),        
         ],
       ),
     );
