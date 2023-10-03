@@ -33,18 +33,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^1.0.4
   image: ^3.3.0
-  dio: ^5.3.3
   path: ^1.8.3
-  flutter_dotenv: ^5.1.0
   flutter_mobx: ^2.1.0
-  image_gallery_saver: ^2.0.3
-  flutter_native_image: ^0.0.6+1
-  easy_puzzle_game: ^0.0.2
-  flutter_svg: ^2.0.7
   mobx: ^2.2.0
-  validators: ^3.0.0
   get_it: ^7.6.4
-  
 
 dev_dependencies:
   flutter_test:

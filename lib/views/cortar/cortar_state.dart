@@ -1,3 +1,5 @@
+import 'package:image/image.dart' as img;
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cortar_state.g.dart';
@@ -5,31 +7,25 @@ part 'cortar_state.g.dart';
 class CortarState = _CortarState with _$CortarState;
 
 abstract class _CortarState with Store {
+  @observable
+  XFile? _image;
 
   @observable
-  bool _hasError = false;
-
-  @observable
-  bool _houveAlteracoes = false;
+  ObservableList<img.Image> _partsImages = ObservableList();
 
   @computed
-  bool get hasError => _hasError;
+  XFile? get image => _image;
 
   @computed
-  bool get houveAlteracoes => _houveAlteracoes;
+  List<img.Image> get partsImages => [..._partsImages];
 
   @action
-  void setHasError({required bool value}) {
-    _hasError = value;
+  void setImage(XFile? image) {
+    _image = image;
   }
 
   @action
-  void setHouveAlteracoes() {
-    _houveAlteracoes = true;
-  }
-
-  @action
-  void resetState() {
-    _hasError = false;
+  void setPartsImages(List<img.Image> parts) {
+    _partsImages = parts.asObservable();
   }
 }

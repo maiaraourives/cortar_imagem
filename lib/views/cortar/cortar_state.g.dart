@@ -9,49 +9,48 @@ part of 'cortar_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CortarState on _CortarState, Store {
-  Computed<bool>? _$hasErrorComputed;
+  Computed<XFile?>? _$imageComputed;
 
   @override
-  bool get hasError => (_$hasErrorComputed ??=
-          Computed<bool>(() => super.hasError, name: '_CortarState.hasError'))
+  XFile? get image => (_$imageComputed ??=
+          Computed<XFile?>(() => super.image, name: '_CortarState.image'))
       .value;
-  Computed<bool>? _$houveAlteracoesComputed;
+  Computed<List<img.Image>>? _$partsImagesComputed;
 
   @override
-  bool get houveAlteracoes =>
-      (_$houveAlteracoesComputed ??= Computed<bool>(() => super.houveAlteracoes,
-              name: '_CortarState.houveAlteracoes'))
-          .value;
+  List<img.Image> get partsImages => (_$partsImagesComputed ??=
+          Computed<List<img.Image>>(() => super.partsImages,
+              name: '_CortarState.partsImages'))
+      .value;
 
-  late final _$_hasErrorAtom =
-      Atom(name: '_CortarState._hasError', context: context);
+  late final _$_imageAtom = Atom(name: '_CortarState._image', context: context);
 
   @override
-  bool get _hasError {
-    _$_hasErrorAtom.reportRead();
-    return super._hasError;
+  XFile? get _image {
+    _$_imageAtom.reportRead();
+    return super._image;
   }
 
   @override
-  set _hasError(bool value) {
-    _$_hasErrorAtom.reportWrite(value, super._hasError, () {
-      super._hasError = value;
+  set _image(XFile? value) {
+    _$_imageAtom.reportWrite(value, super._image, () {
+      super._image = value;
     });
   }
 
-  late final _$_houveAlteracoesAtom =
-      Atom(name: '_CortarState._houveAlteracoes', context: context);
+  late final _$_partsImagesAtom =
+      Atom(name: '_CortarState._partsImages', context: context);
 
   @override
-  bool get _houveAlteracoes {
-    _$_houveAlteracoesAtom.reportRead();
-    return super._houveAlteracoes;
+  ObservableList<img.Image> get _partsImages {
+    _$_partsImagesAtom.reportRead();
+    return super._partsImages;
   }
 
   @override
-  set _houveAlteracoes(bool value) {
-    _$_houveAlteracoesAtom.reportWrite(value, super._houveAlteracoes, () {
-      super._houveAlteracoes = value;
+  set _partsImages(ObservableList<img.Image> value) {
+    _$_partsImagesAtom.reportWrite(value, super._partsImages, () {
+      super._partsImages = value;
     });
   }
 
@@ -59,33 +58,22 @@ mixin _$CortarState on _CortarState, Store {
       ActionController(name: '_CortarState', context: context);
 
   @override
-  void setHasError({required bool value}) {
+  void setImage(XFile? image) {
     final _$actionInfo = _$_CortarStateActionController.startAction(
-        name: '_CortarState.setHasError');
+        name: '_CortarState.setImage');
     try {
-      return super.setHasError(value: value);
+      return super.setImage(image);
     } finally {
       _$_CortarStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setHouveAlteracoes() {
+  void setPartsImages(List<img.Image> parts) {
     final _$actionInfo = _$_CortarStateActionController.startAction(
-        name: '_CortarState.setHouveAlteracoes');
+        name: '_CortarState.setPartsImages');
     try {
-      return super.setHouveAlteracoes();
-    } finally {
-      _$_CortarStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void resetState() {
-    final _$actionInfo = _$_CortarStateActionController.startAction(
-        name: '_CortarState.resetState');
-    try {
-      return super.resetState();
+      return super.setPartsImages(parts);
     } finally {
       _$_CortarStateActionController.endAction(_$actionInfo);
     }
@@ -94,8 +82,8 @@ mixin _$CortarState on _CortarState, Store {
   @override
   String toString() {
     return '''
-hasError: ${hasError},
-houveAlteracoes: ${houveAlteracoes}
+image: ${image},
+partsImages: ${partsImages}
     ''';
   }
 }
