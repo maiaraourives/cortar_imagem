@@ -33,71 +33,22 @@ class CropImageService {
 
     //Quando for a primeira será Y e X sempre zero
     for(int i = 1; i >= rows; i >= columns){
-      int x = 0 ~/ columns;
-      int y = 0 ~/ rows;
-      imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
-    }
-    
-    //Quando for a primeira linha será Y sempre zero
-    for(int i = 1; i >= rows; i < columns){
       int x = lagura ~/ columns;
-      int y = 0 ~/ rows; 
-      imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////
-
-    //Quando for depois da primeira Y e X terão valores, sendo o Y o único que pode aumentar
-    for(int i = 1; i < rows; i < columns){
-      int x = lagura ~/ columns;
-      if (i < rows){
-        late final int y;
-        y = alturaCada + i;
-        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
-      }
-    }
-
-    //Quando for a primeira coluna será X sempre zero, sendo o Y o único que pode aumentar
-    for(int i = 1; i < rows; i >= columns){
-      int x = 0 ~/ columns;
-      if (i < rows){
-        late final int y;
-        y = alturaCada + i;
-        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
-      }
-    }
-
-    //Teste
-    for(int i = 1; i >= rows; i >= columns){
-
-      img.Image? teste;
+      int y = altura ~/ rows;
 
       if(i >= columns){
-        int x = 0 ~/ columns;
-        teste = img.copyCrop(image as img.Image, x, alturaCada, laguraCada, alturaCada);
+        int x = 0;
+        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
       }
-      
-      if (i >= rows){
-        int y = 0 ~/ rows;
-        teste = img.copyCrop(image as img.Image, laguraCada, y, laguraCada, alturaCada);
+
+      if(i >= rows){
+        int y = 0;
+        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
       }
-      
-      imgImageTo(teste!).then((value){
-        parteImagem = value;
-      });
 
-    }
-
-    //Teste
-    for(int i = 1; i < rows; i < columns){
-
-      img.Image? teste;
-
-      int x = lagura ~/ columns;
-
-      if (i < columns){
-      int y = 0 ~/ rows; 
-      imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+      if(i < columns){
+        int x = lagura ~/ columns;
+        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
       }
 
       if (i < rows){
@@ -105,11 +56,12 @@ class CropImageService {
         y = alturaCada + i;
         imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
       }
-      
+
+      img.Image? teste;
+
       imgImageTo(teste!).then((value){
         parteImagem = value;
       });
-
     }
 
     // imgImageTo(imgs!).then((value){
