@@ -15,14 +15,12 @@ class CropImageService {
     return part;
   }
 
-  static Future<List<img.Image>> cropImage(int columns, int rows, XFile image) async {
-
-    img.Image? imgs;
+  static Future<List<img.Image>> cropImage(int columns, int rows, XFile image, img.Image imgs) async {
 
     late ui.Image parteImagem;
 
     //TODO pegar o tamanho total da imagem
-    int altura = imgs!.height; //Altura da imagem
+    int altura = imgs.height; //Altura da imagem
     int lagura = imgs.width; //Largura da imagem
 
     //TODO dividir o total da altura da imagem pela quantidade de linhas -> vai descobrir a altura de cada parte
@@ -120,6 +118,6 @@ class CropImageService {
 
     
     //retornar a lista
-    return [imgs!];
+    return [imgs];
   }
 }

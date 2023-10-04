@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image/image.dart' as img;
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -55,7 +56,7 @@ class _CortarViewState extends State<CortarView> {
 
   void cropImage() async {
     if (formKey.currentState!.validate()) {
-      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!);
+      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!, stateView.partsImages as img.Image);
 
       stateView.setPartsImages(parts);
     }
