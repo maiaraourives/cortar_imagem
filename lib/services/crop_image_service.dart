@@ -3,6 +3,7 @@ import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
 class CropImageService {
+  
   //Coverte a imagem para ui
   static Future<ui.Image> imgImageTo(img.Image image) async {
     ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(image.getBytes(format: img.Format.rgba));
@@ -81,6 +82,30 @@ class CropImageService {
       if (i >= rows){
         int y = 0 ~/ rows;
         teste = img.copyCrop(image as img.Image, laguraCada, y, laguraCada, alturaCada);
+      }
+      
+      imgImageTo(teste!).then((value){
+        parteImagem = value;
+      });
+
+    }
+
+    //Teste
+    for(int i = 1; i < rows; i < columns){
+
+      img.Image? teste;
+
+      int x = lagura ~/ columns;
+
+      if (i < columns){
+      int y = 0 ~/ rows; 
+      imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+      }
+
+      if (i < rows){
+        late final int y;
+        y = alturaCada + i;
+        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
       }
       
       imgImageTo(teste!).then((value){
