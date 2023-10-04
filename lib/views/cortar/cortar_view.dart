@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -65,27 +64,27 @@ class _CortarViewState extends State<CortarView> {
   @override
   Widget build(BuildContext context) {
 
-    final partsImages = stateView.partsImages;
+    // final partsImages = stateView.partsImages;
 
     List<Widget> children = [];
     
-    for (int i = 0; i < partsImages.length; i += 2) {
-      if (i < partsImages.length - 1) {
-        ui.Image? parte1;
-        ui.Image? parte2;
+    // for (int i = 1; i < partsImages.hashCode; i += 2) {
+    //   if (i < partsImages.hashCode - 1) {
+    //     img.Image parte1;
+    //     img.Image parte2;
 
-        parte1 = stateView.partsImages as ui.Image?;
-        parte2 = stateView.partsImages as ui.Image?;
+    //     parte1 = stateView.partsImages;
+    //     parte2 = stateView.partsImages;
         
-        children.add(Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RawImage(image: parte1),
-            RawImage(image: parte2),
-          ],
-        ));
-      }
-    }
+    //     children.add(Row(
+    //       mainAxisSize: MainAxisSize.min,
+    //       children: [
+    //         RawImage(image: parte1),
+    //         RawImage(image: parte2),
+    //       ],
+    //     ));
+    //   }
+    // }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Cortar imagem')),
@@ -174,14 +173,14 @@ class _CortarViewState extends State<CortarView> {
                     Expanded(
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height * 0.7,
-                        child: const ClipRRect(
+                        child:  ClipRRect(
                           child:  SingleChildScrollView(
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Center(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  children: [],
+                                  children: children,
                                 ),
                               ),
                             ),
