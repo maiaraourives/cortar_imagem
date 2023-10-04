@@ -174,9 +174,8 @@ class _CortarViewState extends State<CortarView> {
                     Expanded(
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height * 0.7,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: const SingleChildScrollView(
+                        child: const ClipRRect(
+                          child:  SingleChildScrollView(
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Center(
