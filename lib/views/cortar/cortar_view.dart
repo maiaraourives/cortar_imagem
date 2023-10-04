@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
-import 'dart:ui' as ui;
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -59,7 +58,7 @@ class _CortarViewState extends State<CortarView> {
 
   void cropImage() async {
     if (formKey.currentState!.validate()) {
-      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!, stateView.image as img.Image, stateView.partsImages as ui.Image );
+      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!, stateView.image as img.Image);
 
       stateView.setPartsImages(parts);
     }
@@ -74,8 +73,8 @@ class _CortarViewState extends State<CortarView> {
     
     for (int i = 1; i < image.hashCode; i += 1) {
       if (i < image.hashCode - 1) {
-        late final XFile? parte1;
-        late final XFile? parte2;
+        XFile? parte1;
+        XFile? parte2;
 
         parte1 = image ;
         parte2 = image ;

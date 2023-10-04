@@ -15,7 +15,7 @@ class CropImageService {
     return part;
   }
 
-  static Future<List<img.Image>> cropImage(int columns, int rows, XFile file, img.Image image, ui.Image parteImagem) async {
+  static Future<List<img.Image>> cropImage(int columns, int rows, XFile file, img.Image image) async {
 
     int altura = image.height; //Altura da imagem
     int lagura = image.width; //Largura da imagem
@@ -56,9 +56,9 @@ class CropImageService {
     }
 
     imgImageTo(image).then((value){
-      parteImagem = value;
+      file;
     });
-    
+
     //retornar a lista
     return [image];
   }
