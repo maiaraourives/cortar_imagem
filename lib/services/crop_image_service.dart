@@ -15,12 +15,10 @@ class CropImageService {
     return part;
   }
 
-  static Future<List<img.Image>> cropImage(int columns, int rows, XFile image, img.Image imgs) async {
+  static Future<List<img.Image>> cropImage(int columns, int rows, XFile file, img.Image image, ui.Image parteImagem) async {
 
-    late ui.Image parteImagem;
-
-    int altura = imgs.height; //Altura da imagem
-    int lagura = imgs.width; //Largura da imagem
+    int altura = image.height; //Altura da imagem
+    int lagura = image.width; //Largura da imagem
 
     int alturaCada = altura ~/ rows;
 
@@ -33,35 +31,35 @@ class CropImageService {
 
       if(i >= columns){
         int x = 0;
-        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+        image = img.copyCrop(file as img.Image, x, y, laguraCada, alturaCada);
       }
 
       if(i >= rows){
         int y = 0;
-        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+        image = img.copyCrop(file as img.Image, x, y, laguraCada, alturaCada);
       }
 
       for(int i = 1; i < rows; i < columns){
         
         if(i < columns){
           int x = lagura ~/ columns;
-          imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+          image = img.copyCrop(file as img.Image, x, y, laguraCada, alturaCada);
         }
 
         if (i < rows){
           late final int y;
           y = alturaCada + i;
-          imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+          image = img.copyCrop(file as img.Image, x, y, laguraCada, alturaCada);
         }
 
       }
     }
 
-    imgImageTo(imgs).then((value){
+    imgImageTo(image).then((value){
       parteImagem = value;
     });
     
     //retornar a lista
-    return [imgs];
+    return [image];
   }
 }
