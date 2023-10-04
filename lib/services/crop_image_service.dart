@@ -19,17 +19,12 @@ class CropImageService {
 
     late ui.Image parteImagem;
 
-    //TODO pegar o tamanho total da imagem
     int altura = imgs.height; //Altura da imagem
     int lagura = imgs.width; //Largura da imagem
 
-    //TODO dividir o total da altura da imagem pela quantidade de linhas -> vai descobrir a altura de cada parte
     int alturaCada = altura ~/ rows;
 
-    //TODO dividir o total da largura pela quantidade de colunas -> vai descobrir a largura de cada parte
     int laguraCada = lagura ~/ columns;
-
-    //TODO FOR para cortar as imagens
 
     //Quando for a primeira será Y e X sempre zero
     for(int i = 1; i >= rows; i >= columns){
@@ -46,28 +41,25 @@ class CropImageService {
         imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
       }
 
-      if(i < columns){
-        int x = lagura ~/ columns;
-        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+      for(int i = 1; i < rows; i < columns){
+        
+        if(i < columns){
+          int x = lagura ~/ columns;
+          imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+        }
+
+        if (i < rows){
+          late final int y;
+          y = alturaCada + i;
+          imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
+        }
+
       }
-
-      if (i < rows){
-        late final int y;
-        y = alturaCada + i;
-        imgs = img.copyCrop(image as img.Image, x, y, laguraCada, alturaCada);
-      }
-
-      img.Image? teste;
-
-      imgImageTo(teste!).then((value){
-        parteImagem = value;
-      });
     }
 
-    // imgImageTo(imgs!).then((value){
-    //   parteImagem = value;
-    // });
-
+    imgImageTo(imgs).then((value){
+      parteImagem = value;
+    });
     
     //retornar a lista
     return [imgs];

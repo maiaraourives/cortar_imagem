@@ -1,4 +1,4 @@
-// import 'dart:ui' as ui;
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -56,7 +56,7 @@ class _CortarViewState extends State<CortarView> {
 
   void cropImage() async {
     if (formKey.currentState!.validate()) {
-      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!, stateView.partsImages as img.Image);
+      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!, stateView.image as img.Image);
 
       stateView.setPartsImages(parts);
     }
@@ -65,36 +65,36 @@ class _CortarViewState extends State<CortarView> {
   @override
   Widget build(BuildContext context) {
 
-    // final partsImages = stateView.partsImages;
+    final partsImages = stateView.partsImages;
 
     List<Widget> children = [];
     
-    // for (int i = 0; i < partsImages.length; i += 2) {
-    //   if (i < partsImages.length - 1) {
-    //     ui.Image? parte1;
-    //     ui.Image? parte2;
+    for (int i = 0; i < partsImages.length; i += 2) {
+      if (i < partsImages.length - 1) {
+        ui.Image? parte1;
+        ui.Image? parte2;
 
-    //     parte1 = partsImages;
-    //     parte2 = partsImages;
+        parte1 = stateView.partsImages as ui.Image?;
+        parte2 = stateView.partsImages as ui.Image?;
         
-    //     children.add(Row(
-    //       mainAxisSize: MainAxisSize.min,
-    //       children: [
-    //         RawImage(image: parte1),
-    //         RawImage(image: parte2),
-    //       ],
-    //     ));
-    //   }
-    // }
+        children.add(Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RawImage(image: parte1),
+            RawImage(image: parte2),
+          ],
+        ));
+      }
+    }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Crop Image')),
+      appBar: AppBar(title: const Text('Cortar imagem')),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
+
           Row(
             children: [
-
               Expanded(
                 child: Form(
                   key: formKey,
@@ -170,11 +170,31 @@ class _CortarViewState extends State<CortarView> {
                 // final partsImages = stateView.partsImages[index];
                 
                 return Column(
-                  children: children,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: const SingleChildScrollView(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
-          ),        
+          ),
         ],
       ),
     );
