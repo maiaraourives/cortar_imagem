@@ -32,6 +32,8 @@ class CropImageService {
 
     int laguraCada = lagura ~/ columns; //Largura de cada column
 
+    img.copyCrop(imageBytes, 1, 1, laguraCada, alturaCada);
+
     //Realização do corte da imagem
     for(int i = 0; i < rows; i ++){
       
@@ -40,7 +42,7 @@ class CropImageService {
       if(i % 2 == 0){
         int x = 0;
 
-        imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
+        img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
       }
 
       for(int j = 0; i < columns; j ++){
