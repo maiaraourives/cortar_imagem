@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -143,7 +145,7 @@ class _CortarViewState extends State<CortarView> {
               itemBuilder: (context, index) {
                 final partsImages = stateView.partsImages[index];
                 
-                return RawImage(image: partsImages);
+                return RawImage(image: partsImages as ui.Image);
               },
             ),
           ),
