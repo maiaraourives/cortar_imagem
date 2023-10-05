@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image/image.dart' as img;
-import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img; 
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -66,28 +65,6 @@ class _CortarViewState extends State<CortarView> {
 
   @override
   Widget build(BuildContext context) {
-
-    final image = stateView.image;
-
-    List<Widget> children = [];
-    
-    for (int i = 1; i < image.hashCode; i += 1) {
-      if (i < image.hashCode - 1) {
-        XFile? parte1;
-        XFile? parte2;
-
-        parte1 = image ;
-        parte2 = image ;
-        
-        children.add(Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.file(File(parte1!.path)),
-            Image.file(File(parte2!.path)),
-          ],
-        ));
-      }
-    }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Cortar imagem')),
@@ -183,7 +160,7 @@ class _CortarViewState extends State<CortarView> {
                               child: Center(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  children: children,
+                                  children: [Image.file(File(stateView.image!.path))],
                                 ),
                               ),
                             ),

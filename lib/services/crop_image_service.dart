@@ -42,13 +42,12 @@ class CropImageService {
       for(int i = 1; i < rows; i < columns){
         
         if(i < columns){
-          int x = lagura ~/ columns;
           image = img.copyCrop(file as img.Image, x, y, laguraCada, alturaCada);
         }
 
-        if (i < rows){
+        if (2 < rows){
           late final int y;
-          y = alturaCada + i;
+          y = alturaCada * i;
           image = img.copyCrop(file as img.Image, x, y, laguraCada, alturaCada);
         }
 
