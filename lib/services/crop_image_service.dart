@@ -23,8 +23,6 @@ class CropImageService {
 
     var imageBytes = img.decodeImage(bytes)!;
 
-    // img.Image image;
-
     int altura = imageBytes.height; //Altura da imagem
     int lagura = imageBytes.width; //Largura da imagem
 
@@ -32,42 +30,42 @@ class CropImageService {
 
     int laguraCada = lagura ~/ columns;
 
-
     //Quando for a primeira será Y e X sempre zero
-    for(int i = 0; i < rows; i ++){
-
-      if(i > rows){
-        int x = lagura ~/ columns;
-        int y = 0;
+    for(int i = 0; i < columns; i ++){
+      
+      if(i > columns){
+        int y = altura ~/ rows;
+        int x = 0;
+        
+        imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
+      }
+      
+      if(i < columns){
+        int x = lagura * i;
+        int y = altura ~/ rows;
 
         imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
       }
+      
+      for(int i = 0; i < rows; i ++){
 
-      if (i < rows){
-        late final int y;
-        y = alturaCada * i;
-        int x = lagura ~/ columns;
-
-        imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
-      }
-
-      for(int i = 0; i < columns; i ++){
-
-        if(i > columns){
-          int y = altura ~/ rows;
-          int x = 0;
+        if(i > rows){
+          int x = lagura ~/ columns;
+          int y = 0;
 
           imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
         }
-        
-        if(i < columns){
-          int x = lagura * i;
-          int y = altura ~/ rows;
+
+        if (i < rows){
+          late final int y;
+          y = alturaCada * i;
+          int x = lagura ~/ columns;
 
           imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
         }
       }
     }
+    
 
     //retornar a lista
     return [imageBytes];
