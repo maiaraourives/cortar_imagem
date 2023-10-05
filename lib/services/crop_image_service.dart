@@ -31,26 +31,22 @@ class CropImageService {
     int laguraCada = lagura ~/ columns;
 
     //Quando for a primeira será Y e X sempre zero
-    for(int i = 0; i < columns; i ++){
+    for(int i = 0; i < rows; i ++){
       
-      if(i < columns){
-        int x = laguraCada * i;
-        int y = alturaCada * i;
+      int x = 0;
+      int y = alturaCada * i;
+      
+      imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
 
-        imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
-      }
+      for(int i = 0; i < columns; i ++){
 
-      for(int i = 0; i < rows; i ++){
-
-        if (i < rows){
-          int y = alturaCada * i;
+        if (i < columns){
           int x = laguraCada * i;
 
           imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
         }
       }
-    }
-    
+    }    
 
     //retornar a lista
     return [imageBytes];
