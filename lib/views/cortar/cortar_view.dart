@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -142,9 +140,10 @@ class _CortarViewState extends State<CortarView> {
                 crossAxisSpacing: 2,
                 mainAxisSpacing: 2,
               ),
-              itemBuilder: (_, index) {
+              itemBuilder: (context, index) {
+                final partsImages = stateView.partsImages[index];
                 
-                return Image.file(File(stateView.image!.path));
+                return RawImage(image: partsImages);
               },
             ),
           ),
