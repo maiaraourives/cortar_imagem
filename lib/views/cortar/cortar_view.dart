@@ -139,8 +139,8 @@ class _CortarViewState extends State<CortarView> {
               physics: const BouncingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: cortar.colunas!,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
               ),
               itemBuilder: (_, index) {
                 

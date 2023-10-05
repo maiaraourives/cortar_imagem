@@ -19,11 +19,13 @@ class CropImageService {
   static Future<List<img.Image>> cropImage(int columns, int rows, XFile file) async {
 
     final path = file.path;
+    
     final bytes = await File(path).readAsBytes();
 
     var imageBytes = img.decodeImage(bytes)!;
 
     int altura = imageBytes.height; //Altura da imagem
+
     int lagura = imageBytes.width; //Largura da imagem
 
     int alturaCada = altura ~/ rows; //Altura de cada row
