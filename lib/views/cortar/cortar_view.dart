@@ -1,4 +1,4 @@
-import 'dart:ui' as ui;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -142,10 +142,10 @@ class _CortarViewState extends State<CortarView> {
                 crossAxisSpacing: 2,
                 mainAxisSpacing: 2,
               ),
-              itemBuilder: (context, index) {
+              itemBuilder: (_, index) {
                 final partsImages = stateView.partsImages[index];
                 
-                return RawImage(image: partsImages as ui.Image);
+                return Image.file(File(partsImages.toString()));
               },
             ),
           ),

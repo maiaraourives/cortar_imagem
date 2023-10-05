@@ -20,7 +20,7 @@ class CropImageService {
 
     final path = file.path;
     
-    final bytes = await File(path).readAsBytes();
+    final bytes = File(path).readAsBytesSync();
 
     var imageBytes = img.decodeImage(bytes)!;
 
