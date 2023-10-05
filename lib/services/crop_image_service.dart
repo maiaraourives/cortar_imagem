@@ -26,22 +26,25 @@ class CropImageService {
     int altura = imageBytes.height; //Altura da imagem
     int lagura = imageBytes.width; //Largura da imagem
 
-    int alturaCada = altura ~/ rows;
+    int alturaCada = altura ~/ rows; //Altura de cada row
 
-    int laguraCada = lagura ~/ columns;
+    int laguraCada = lagura ~/ columns; //Largura de cada column
 
-    //Quando for a primeira será Y e X sempre zero
+    //Realização do corte da imagem
     for(int i = 0; i < rows; i ++){
       
-      int x = 0;
       int y = alturaCada * i;
-      
-      imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
 
-      for(int i = 0; i < columns; i ++){
+      if(i % 2 == 0){
+        int x = 0;
 
-        if (i < columns){
-          int x = laguraCada * i;
+        imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
+      }
+
+      for(int j = 0; i < columns; j ++){
+        
+        if(j % 2 == 1){
+          int x = laguraCada * j;
 
           imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
         }
