@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image/image.dart' as img; 
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -57,7 +56,7 @@ class _CortarViewState extends State<CortarView> {
 
   void cropImage() async {
     if (formKey.currentState!.validate()) {
-      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!, stateView.image as img.Image);
+      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!);
 
       stateView.setPartsImages(parts);
     }
@@ -131,8 +130,6 @@ class _CortarViewState extends State<CortarView> {
           ),
 
           const SizedBox(height: 50),
-
-          //TODO exibir aqui as imagens cortadas. Utilizar GridView com axisCount = cortar.colunas
           
           Container(
             margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
@@ -146,30 +143,8 @@ class _CortarViewState extends State<CortarView> {
                 mainAxisSpacing: 10,
               ),
               itemBuilder: (_, index) {
-                // final partsImages = stateView.partsImages[index];
                 
-                return Column(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.7,
-                        child:  ClipRRect(
-                          child:  SingleChildScrollView(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Center(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [Image.file(File(stateView.image!.path))],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
+                return Image.file(File(stateView.image!.path));
               },
             ),
           ),
