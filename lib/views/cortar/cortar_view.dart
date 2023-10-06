@@ -144,8 +144,9 @@ class _CortarViewState extends State<CortarView> {
               ),
               itemBuilder: (_, index) {
                 final partsImages = stateView.partsImages[index];
-                
-                return Image.file(File(partsImages.toString()));
+                final image = stateView.image!;
+
+                return Image.file(File(image.path));
               },
             ),
           ),
