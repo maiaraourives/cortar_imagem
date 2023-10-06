@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:image/image.dart' as img;
-import 'package:image/image.dart';
 import 'package:image_picker/image_picker.dart';
 
 
@@ -34,6 +33,8 @@ class CropImageService {
 
     int laguraCada = lagura ~/ columns; //Largura de cada column
 
+    List<img.Image> partesImagens = [];
+
     //Realização do corte da imagem
     for(int i = 0; i < rows; i ++){
 
@@ -43,8 +44,8 @@ class CropImageService {
         int x = 0;
 
         img.Image crop = img.copyCrop(imageBytes,x,y,laguraCada,alturaCada,);
-
-        File(path).writeAsBytesSync(encodePng(crop));
+        
+        partesImagens.add(crop);
       }
 
       for(int j = 0; i < columns; j ++){
@@ -54,7 +55,9 @@ class CropImageService {
 
           img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada,);
 
-          File(path).writeAsBytesSync(encodePng(crop));
+          partesImagens.add(crop);
+
+          // File(path).writeAsBytesSync(encodePng(crop));
         }
       }
     } 

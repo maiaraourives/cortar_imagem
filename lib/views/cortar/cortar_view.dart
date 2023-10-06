@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image/image.dart' as img;
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -67,6 +68,8 @@ class _CortarViewState extends State<CortarView> {
   @override
   Widget build(BuildContext context) {
 
+    List<Widget> children = [];
+
     return Scaffold(
       appBar: AppBar(title: const Text('Cortar imagem')),
       body: ListView(
@@ -112,6 +115,11 @@ class _CortarViewState extends State<CortarView> {
                 ),
               ),
 
+              // ElevatedButton(
+              //   onPressed: (){},
+              //   child: const Text('Salvar imagem'),
+              // ),
+
               Column(
                 children: [
                   ElevatedButton(
@@ -146,9 +154,11 @@ class _CortarViewState extends State<CortarView> {
               ),
               itemBuilder: (_, index) {
                 final partsImages = stateView.partsImages[index];
-                final image = stateView.image!;
+                children.add(partsImages as Widget);
 
-                return Image.file(File(image.path));
+                return Column(
+                  children: children,
+                );
               },
             ),
           ),
