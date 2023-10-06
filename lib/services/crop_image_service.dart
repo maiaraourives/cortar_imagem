@@ -4,6 +4,7 @@ import 'package:image/image.dart' as img;
 import 'package:image/image.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class CropImageService {
   
   //Coverte a imagem para ui
@@ -43,7 +44,7 @@ class CropImageService {
 
         img.Image crop = img.copyCrop(imageBytes,x,y,laguraCada,alturaCada,);
 
-        File(path).writeAsBytes(encodePng(crop));
+        File(path).writeAsBytesSync(encodePng(crop));
       }
 
       for(int j = 0; i < columns; j ++){
@@ -53,7 +54,7 @@ class CropImageService {
 
           img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada,);
 
-          File(path).writeAsBytes(encodePng(crop));
+          File(path).writeAsBytesSync(encodePng(crop));
         }
       }
     } 
