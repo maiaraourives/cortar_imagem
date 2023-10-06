@@ -62,6 +62,8 @@ class _CortarViewState extends State<CortarView> {
     }
   }
 
+  void salvarImagem() async{}
+
   @override
   Widget build(BuildContext context) {
 
