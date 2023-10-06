@@ -54,8 +54,6 @@ class CropImageService {
           img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada,);
 
           File(path).writeAsBytes(encodePng(crop));
-
-          // imageBytes = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
         }
       }
     } 
