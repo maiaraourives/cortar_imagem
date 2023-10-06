@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
-
 class CropImageService {
   
   //Coverte a imagem para ui
@@ -56,13 +55,11 @@ class CropImageService {
           img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada,);
 
           partesImagens.add(crop);
-
-          // File(path).writeAsBytesSync(encodePng(crop));
         }
       }
     } 
 
     //retornar a lista
-    return [imageBytes];
+    return partesImagens;
   }
 }

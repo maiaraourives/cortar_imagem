@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image/image.dart' as img;
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -145,7 +142,7 @@ class _CortarViewState extends State<CortarView> {
             margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
             child: GridView.builder(
               shrinkWrap: true,
-              itemCount: stateView.partsImages.length,
+              itemCount: 4,
               physics: const BouncingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: cortar.colunas!,
@@ -154,9 +151,20 @@ class _CortarViewState extends State<CortarView> {
               ),
               itemBuilder: (_, index) {
                 final partsImages = stateView.partsImages[index];
-                children.add(partsImages as Widget);
+                // children.add(Image.file(File(stateView.image!.path)));
+
+                // for (int i = 0; i < partsImages.length; i += 2) {
+                //   if (i < partsImages.length - 1) {
+                //     late final String imagem;
+
+                //     imagem = partsImages[i + 1].toString();
+
+                //     children.add(Image.file(File(imagem)));
+                //   }
+                // }
 
                 return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: children,
                 );
               },
