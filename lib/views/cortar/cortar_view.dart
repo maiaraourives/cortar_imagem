@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -162,9 +163,19 @@ class _CortarViewState extends State<CortarView> {
               ),
               itemBuilder: (_, index) {
                 // final partsImages = stateView.partsImages[index];
+
+                // final imageBytes = partsImages.getBytes();
+
+                // final base64 = base64Encode(imageBytes);
+
+                // final unit8List = base64Decode(base64);
                 
                 final path = stateView.image!.path;
                 final bytes = File(path).readAsBytesSync();
+
+                // final list = bytes.buffer.asUint8List();
+
+                // return Image.memory(unit8List);
 
                 return Image.memory(bytes);
               },
