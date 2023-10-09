@@ -41,6 +41,7 @@ dependencies:
   dio: ^5.3.3
   image_gallery_saver: ^2.0.3
   fluttertoast: ^8.2.2
+  image_downloader: ^0.31.0
 
 dev_dependencies:
   flutter_test:

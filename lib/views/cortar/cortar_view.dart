@@ -20,6 +20,7 @@ class _CortarViewState extends State<CortarView> {
   CortarModel cortar = CortarModel();
 
   final stateView = CortarState();
+
   final formKey = GlobalKey<FormState>();
 
   ///[Controllers]
@@ -65,8 +66,6 @@ class _CortarViewState extends State<CortarView> {
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> children = [];
-
     return Scaffold(
       appBar: AppBar(title: const Text('Cortar imagem')),
       body: ListView(
@@ -80,6 +79,8 @@ class _CortarViewState extends State<CortarView> {
                   key: formKey,
                   child: Column(
                     children: [
+
+                      //Campo para informar o número de linhas
                       CsTextFormField(
                         keyboardType: TextInputType.number,
                         controller: linhaController,
@@ -93,6 +94,8 @@ class _CortarViewState extends State<CortarView> {
                         },
                         validator: CortarValidator.validateLinha,
                       ),
+
+                      //Campo de número de colunas (fixo)
                       CsTextFormField(
                         keyboardType: TextInputType.number,
                         controller: colunaController,
@@ -107,6 +110,7 @@ class _CortarViewState extends State<CortarView> {
                         },
                         validator: CortarValidator.validateColuna,
                       ),
+
                     ],
                   ),
                 ),
@@ -119,10 +123,14 @@ class _CortarViewState extends State<CortarView> {
 
               Column(
                 children: [
+
+                  //ElevatedButton para selecionar imagem
                   ElevatedButton(
                     onPressed: selectImage,
                     child: const Text('Selecionar Imagem'),
                   ),
+
+                  //ElevatedButton para cortar imagem
                   Observer(
                     builder: (_) {
                       return ElevatedButton(
@@ -137,12 +145,13 @@ class _CortarViewState extends State<CortarView> {
           ),
 
           const SizedBox(height: 50),
-          
+
+          //Campo que exibe as imagens cortadas
           Container(
             margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
             child: GridView.builder(
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: stateView.partsImages.length,
               physics: const BouncingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: cortar.colunas!,
@@ -151,22 +160,8 @@ class _CortarViewState extends State<CortarView> {
               ),
               itemBuilder: (_, index) {
                 final partsImages = stateView.partsImages[index];
-                // children.add(Image.file(File(stateView.image!.path)));
 
-                // for (int i = 0; i < partsImages.length; i += 2) {
-                //   if (i < partsImages.length - 1) {
-                //     late final String imagem;
-
-                //     imagem = partsImages[i + 1].toString();
-
-                //     children.add(Image.file(File(imagem)));
-                //   }
-                // }
-
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: children,
-                );
+                return RawImage(image: partsImages);
               },
             ),
           ),
