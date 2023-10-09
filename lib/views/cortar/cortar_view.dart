@@ -5,6 +5,7 @@ import 'package:image/image.dart' as img;
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
+import '../../services/download_service.dart';
 import '../../services/image_picker_service.dart';
 import '../../widgets/cs_text_form_field.dart';
 import 'cortar_state.dart';
@@ -61,7 +62,9 @@ class _CortarViewState extends State<CortarView> {
     }
   }
 
-  void salvarImagem() async{}
+  void salvarImagem() async {
+    DownloadService.download(stateView.partsImages.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,10 +119,7 @@ class _CortarViewState extends State<CortarView> {
                 ),
               ),
 
-              // ElevatedButton(
-              //   onPressed: (){},
-              //   child: const Text('Salvar imagem'),
-              // ),
+              
 
               Column(
                 children: [
@@ -144,11 +144,9 @@ class _CortarViewState extends State<CortarView> {
             ],
           ),
 
-          const SizedBox(height: 50),
-
           //Campo que exibe as imagens cortadas
           Container(
-            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            margin: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
             child: Observer(builder: (_){
               return GridView.builder(
               shrinkWrap: true,
@@ -170,6 +168,11 @@ class _CortarViewState extends State<CortarView> {
               },
             );
             }),
+          ),
+
+          ElevatedButton(
+            onPressed: salvarImagem,
+            child: const Text('Salvar imagem'),
           ),
         ],
       ),
