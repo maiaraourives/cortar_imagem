@@ -22,7 +22,7 @@ class CropImageService {
     
     final bytes = File(path).readAsBytesSync();
 
-    var imageBytes = img.decodeImage(bytes)!;
+    final imageBytes = img.decodeImage(bytes)!;
 
     int altura = imageBytes.height; //Altura da imagem
 
