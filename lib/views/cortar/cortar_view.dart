@@ -164,7 +164,9 @@ class _CortarViewState extends State<CortarView> {
 
                 final imageBytes = img.encodePng(partsImages);
 
-                return Image.memory(Uint8List.fromList(imageBytes));
+                final bytes = Uint8List.fromList(imageBytes);
+                
+                return Image.memory(bytes, fit: BoxFit.fill);
               },
             ),
           ),
