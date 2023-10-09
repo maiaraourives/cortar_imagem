@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image/image.dart' as img;
 
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
@@ -162,20 +163,13 @@ class _CortarViewState extends State<CortarView> {
                 mainAxisSpacing: 2,
               ),
               itemBuilder: (_, index) {
-                // final partsImages = stateView.partsImages[index];
+                final partsImages = stateView.partsImages[index];
 
-                // final imageBytes = partsImages.getBytes();
+                final imageBytes = img.encodePng(partsImages);
 
-                // final base64 = base64Encode(imageBytes);
+                final base64 = base64Encode(imageBytes);
 
-                // final unit8List = base64Decode(base64);
-                
-                final path = stateView.image!.path;
-                final bytes = File(path).readAsBytesSync();
-
-                // final list = bytes.buffer.asUint8List();
-
-                // return Image.memory(unit8List);
+                final bytes = File(base64).readAsBytesSync();
 
                 return Image.memory(bytes);
               },
