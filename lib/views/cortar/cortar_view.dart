@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:image/image.dart' as img;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -163,12 +161,12 @@ class _CortarViewState extends State<CortarView> {
                 mainAxisSpacing: 2,
               ),
               itemBuilder: (_, index) {
-                final partsImages = stateView.partsImages[index];
+                // final partsImages = stateView.partsImages[index];
                 
                 final path = stateView.image!.path;
                 final bytes = File(path).readAsBytesSync();
 
-                return Image.memory(partsImages.getBytes());
+                return Image.memory(bytes);
               },
             ),
           ),
