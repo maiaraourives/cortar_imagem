@@ -161,7 +161,7 @@ class _CortarViewState extends State<CortarView> {
               itemBuilder: (_, index) {
                 final partsImages = stateView.partsImages[index];
 
-                return RawImage(image: partsImages);
+                return Image.asset(partsImages.toString());
               },
             ),
           ),
