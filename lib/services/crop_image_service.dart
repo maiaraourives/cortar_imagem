@@ -47,7 +47,7 @@ class CropImageService {
         partesImagens.add(crop);
       }
 
-      for(int j = 0; i < columns; j ++){
+      for(int j = 0; j < columns; j ++){
         
         if(j % 2 == 1){
           int x = laguraCada * j;

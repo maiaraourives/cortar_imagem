@@ -55,10 +55,10 @@ class _CortarViewState extends State<CortarView> {
   }
 
   void cropImage() async {
+    final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!);
+    stateView.setPartsImages(parts);
     if (formKey.currentState!.validate()) {
-      final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!);
 
-      stateView.setPartsImages(parts);
     }
   }
 
@@ -93,7 +93,7 @@ class _CortarViewState extends State<CortarView> {
                         onChanged: (linha) {
                           cortar.linhas = int.tryParse(linha!);
                         },
-                        validator: CortarValidator.validateLinha,
+                        //validator: CortarValidator.validateLinha,
                       ),
 
                       //Campo de número de colunas (fixo)
@@ -109,7 +109,7 @@ class _CortarViewState extends State<CortarView> {
                         onChanged: (coluna) {
                           cortar.colunas = int.tryParse(coluna!);
                         },
-                        validator: CortarValidator.validateColuna,
+                        //validator: CortarValidator.validateColuna,
                       ),
 
                     ],
@@ -149,8 +149,9 @@ class _CortarViewState extends State<CortarView> {
 
           //Campo que exibe as imagens cortadas
           Container(
-            margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
-            child: GridView.builder(
+            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Observer(builder: (_){
+              return GridView.builder(
               shrinkWrap: true,
               itemCount: stateView.partsImages.length,
               physics: const BouncingScrollPhysics(),
@@ -168,7 +169,8 @@ class _CortarViewState extends State<CortarView> {
                 
                 return Image.memory(bytes, fit: BoxFit.fill);
               },
-            ),
+            );
+            }),
           ),
         ],
       ),
