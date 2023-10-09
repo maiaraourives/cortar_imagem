@@ -39,10 +39,10 @@ class CropImageService {
 
       int y = alturaCada * i;
 
-      if(i % 2 == 0){
+      if(i < rows){
         int x = 0;
 
-        img.Image crop = img.copyCrop(imageBytes,x,y,laguraCada,alturaCada,);
+        img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
         
         partesImagens.add(crop);
       }
@@ -52,7 +52,7 @@ class CropImageService {
         if(j % 2 == 1){
           int x = laguraCada * j;
 
-          img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada,);
+          img.Image crop = img.copyCrop(imageBytes, x, y, laguraCada, alturaCada);
 
           partesImagens.add(crop);
         }

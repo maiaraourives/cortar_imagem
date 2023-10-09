@@ -8,7 +8,6 @@ import '../../services/crop_image_service.dart';
 import '../../services/image_picker_service.dart';
 import '../../widgets/cs_text_form_field.dart';
 import 'cortar_state.dart';
-import 'cortar_validator.dart';
 
 class CortarView extends StatefulWidget {
   const CortarView({super.key});
