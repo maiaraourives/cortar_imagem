@@ -87,7 +87,7 @@ class _CortarViewState extends State<CortarView> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Cortar parte')),
+      appBar: AppBar(title: const Text('Cortar Imagem')),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -141,18 +141,18 @@ class _CortarViewState extends State<CortarView> {
               Column(
                 children: [
 
-                  //ElevatedButton para selecionar parte
+                  //ElevatedButton para selecionar imagem
                   ElevatedButton(
                     onPressed: selectImage,
-                    child: const Text('Selecionar parte'),
+                    child: const Text('Selecionar Imagem'),
                   ),
 
-                  //ElevatedButton para cortar parte
+                  //ElevatedButton para cortar imagem
                   Observer(
                     builder: (_) {
                       return ElevatedButton(
                         onPressed: stateView.image == null ? null : cropImage,
-                        child: const Text('Cortar parte'),
+                        child: const Text('Cortar imagem'),
                       );
                     },
                   ),
@@ -195,7 +195,7 @@ class _CortarViewState extends State<CortarView> {
 
           ElevatedButton(
             onPressed: salvarparte,
-            child: const Text('Salvar partes'),
+            child: const Text('Salvar imagens'),
           ),
         ],
       ),
