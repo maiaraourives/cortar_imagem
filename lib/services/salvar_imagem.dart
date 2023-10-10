@@ -10,16 +10,22 @@ class SalvarImagem{
   static Future<dynamic> salvarImagem(List<img.Image> image) async {
 
     try {
-      final pickedFile = await ImagePicker().pickMedia(imageQuality: 100);
+      final file = await ImagePicker().pickMedia(imageQuality: 100);
+      
+      // final imagem = img.encodeCurImages(image);
 
-      for (int i = 0; i < 10; i++) {
+      // final base64 = base64Encode(imagem);
 
-        if (pickedFile != null) {
-          final File storeImage = File(pickedFile.path);
+      // final file = File(base64); 
+
+      for (int i = 0; i < 10;) {
+
+        if (file != null) {
+          final File storeImage = File(file.path);
 
           final appDir = await getApplicationDocumentsDirectory();
 
-          final fileName = basename(pickedFile.path);
+          final fileName = basename(file.path);
     
           final File localImage = await storeImage.copy('${appDir.path}/parte-$i-$fileName ');
 

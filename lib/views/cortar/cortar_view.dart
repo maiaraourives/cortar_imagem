@@ -148,30 +148,36 @@ class _CortarViewState extends State<CortarView> {
           //Campo que exibe as imagens cortadas
           Container(
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
-            child: Observer(builder: (_){
-              return GridView.builder(
-              shrinkWrap: true,
-              itemCount: stateView.partsImages.length,
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: cortar.colunas!,
-                crossAxisSpacing: 2,
-                mainAxisSpacing: 2,
-              ),
-              itemBuilder: (_, index) {
-                final partsImages = stateView.partsImages[index];
+            child: Column(
+              children: [
+                Observer(
+                  builder: (_){
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: stateView.partsImages.length,
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: cortar.colunas!,
+                        crossAxisSpacing: 2,
+                        mainAxisSpacing: 2,
+                      ),
+                      itemBuilder: (_, index) {
+                        final partsImages = stateView.partsImages[index];
 
-                final imageBytes = img.encodePng(partsImages);
+                        final imageBytes = img.encodePng(partsImages);
 
-                final bytes = Uint8List.fromList(imageBytes);
-                
-                return Image.memory(bytes, fit: BoxFit.fill);
-              },
-            );
-            }),
+                        final bytes = Uint8List.fromList(imageBytes);
+                    
+                        return Image.memory(bytes, fit: BoxFit.fill);
+                      },
+                    );
+                  }
+                ),
+              ],
+            ),
           ),
 
-          ElevatedButton(
+          ElevatedButton  (
             onPressed: salvarImagem,
             child: const Text('Salvar imagem'),
           ),
