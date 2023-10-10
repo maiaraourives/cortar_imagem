@@ -1,41 +1,23 @@
 import 'dart:io';
 
-import 'package:image/image.dart' as img;
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SalvarImagem{
 
-  static Future<dynamic> salvarImagem(List<img.Image> image) async {
+  static Future<String> salvarImagem(File file) async {
 
-    try {
-      final file = await ImagePicker().pickMedia(imageQuality: 100);
-      
-      // final imagem = img.encodeCurImages(image);
+    Directory dir = await getApplicationDocumentsDirectory();
 
-      // final base64 = base64Encode(imagem);
+    String dirPath = dir.path;
 
-      // final file = File(base64); 
+    String filename = 'imagem - ${DateTime.now().microsecondsSinceEpoch.toString()}.jpg';
 
-      for (int i = 0; i < 10;) {
+    String savedPath = '$dirPath/$filename';
 
-        if (file != null) {
-          final File storeImage = File(file.path);
+    File image = File(file.path);
 
-          final appDir = await getApplicationDocumentsDirectory();
+    File(savedPath).writeAsBytesSync(image.readAsBytesSync());
 
-          final fileName = basename(file.path);
-    
-          final File localImage = await storeImage.copy('${appDir.path}/parte-$i-$fileName ');
-
-          return localImage;
-
-        }
-
-      }
-
-    }catch(_) {}
+    return savedPath;
   }
 }
-

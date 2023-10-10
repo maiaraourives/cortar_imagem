@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -63,8 +65,14 @@ class _CortarViewState extends State<CortarView> {
   }
 
   void salvarImagem() async {
-    final imagem = await SalvarImagem.salvarImagem(stateView.partsImages);
-    stateView.setPartsImages(imagem);
+    final path = stateView.image!.path;
+    final bytes = File(path);
+
+    // final imagem = img.encodeCurImages(stateView.partsImages);
+
+    // final bytes = Uint8List.fromList(imagem);
+
+    SalvarImagem.salvarImagem(bytes);
   }
 
   @override
