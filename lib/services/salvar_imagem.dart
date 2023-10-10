@@ -5,9 +5,9 @@ import 'package:path_provider/path_provider.dart';
 class SalvarImagem{
 
   static Future<String> salvarImagem(File file) async {
-
+    
     Directory dir = await getApplicationDocumentsDirectory();
-
+     
     String dirPath = dir.path;
 
     String filename = 'imagem - ${DateTime.now().microsecondsSinceEpoch.toString()}.jpg';
@@ -19,5 +19,6 @@ class SalvarImagem{
     File(savedPath).writeAsBytesSync(image.readAsBytesSync());
 
     return savedPath;
+
   }
 }

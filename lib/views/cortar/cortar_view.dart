@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../services/image_picker_service.dart';
 import '../../services/salvar_imagem.dart';
 import '../../widgets/cs_text_form_field.dart';
 import 'cortar_state.dart';
+import 'cortar_validator.dart';
 
 class CortarView extends StatefulWidget {
   const CortarView({super.key});
@@ -59,18 +61,18 @@ class _CortarViewState extends State<CortarView> {
   void cropImage() async {
     final parts = await CropImageService.cropImage(cortar.colunas!, cortar.linhas!, stateView.image!);
     stateView.setPartsImages(parts);
-    if (formKey.currentState!.validate()) {
-
-    }
+    formKey.currentState!.validate();
   }
 
   void salvarImagem() async {
-    final path = stateView.image!.path;
-    final bytes = File(path);
+    // final path = stateView.image!.path;
+    // final bytes = File(path);
 
-    // final imagem = img.encodeCurImages(stateView.partsImages);
+    final imagem = img.encodeCurImages(stateView.partsImages);
 
-    // final bytes = Uint8List.fromList(imagem);
+    final base64 = base64Encode(imagem);
+
+    final bytes = File(base64); 
 
     SalvarImagem.salvarImagem(bytes);
   }
@@ -104,7 +106,7 @@ class _CortarViewState extends State<CortarView> {
                         onChanged: (linha) {
                           cortar.linhas = int.tryParse(linha!);
                         },
-                        //validator: CortarValidator.validateLinha,
+                        validator: CortarValidator.validateLinha,
                       ),
 
                       //Campo de número de colunas (fixo)
@@ -120,7 +122,7 @@ class _CortarViewState extends State<CortarView> {
                         onChanged: (coluna) {
                           cortar.colunas = int.tryParse(coluna!);
                         },
-                        //validator: CortarValidator.validateColuna,
+                        validator: CortarValidator.validateColuna,
                       ),
 
                     ],
