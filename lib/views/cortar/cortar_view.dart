@@ -6,6 +6,7 @@ import 'package:image/image.dart' as img;
 import '../../models/cortar_model.dart';
 import '../../services/crop_image_service.dart';
 import '../../services/image_picker_service.dart';
+import '../../services/salvar_imagem.dart';
 import '../../widgets/cs_text_form_field.dart';
 import 'cortar_state.dart';
 
@@ -62,7 +63,8 @@ class _CortarViewState extends State<CortarView> {
   }
 
   void salvarImagem() async {
-    
+    final imagem = await SalvarImagem.salvarImagem(stateView.partsImages);
+    stateView.setPartsImages(imagem);
   }
 
   @override
