@@ -63,23 +63,31 @@ class _CortarViewState extends State<CortarView> {
     formKey.currentState!.validate();
   }
 
-  void salvarImagem() async {
-    final partsImages = stateView.partsImages.first;
-    
-    final imageBytes = img.encodePng(partsImages);
-    
-    final uint8List = Uint8List.fromList(imageBytes);
+  void salvarparte() async {
 
-    final bytes = File.fromRawPath(uint8List); 
+    final partsImages = stateView.partsImages;
 
-    SalvarImagem.salvarImagem(bytes);
+    for (int i = 0; i < partsImages.length; i ++) {
+      if (i < partsImages.length) {
+  
+        final parte = partsImages[i];
+
+        final imageBytes = img.encodePng(parte); 
+        
+        final uint8List = Uint8List.fromList(imageBytes);
+
+        final bytes = File.fromRawPath(uint8List); 
+
+        SalvarImagem.salvarImagem(bytes);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Cortar imagem')),
+      appBar: AppBar(title: const Text('Cortar parte')),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -133,18 +141,18 @@ class _CortarViewState extends State<CortarView> {
               Column(
                 children: [
 
-                  //ElevatedButton para selecionar imagem
+                  //ElevatedButton para selecionar parte
                   ElevatedButton(
                     onPressed: selectImage,
-                    child: const Text('Selecionar Imagem'),
+                    child: const Text('Selecionar parte'),
                   ),
 
-                  //ElevatedButton para cortar imagem
+                  //ElevatedButton para cortar parte
                   Observer(
                     builder: (_) {
                       return ElevatedButton(
                         onPressed: stateView.image == null ? null : cropImage,
-                        child: const Text('Cortar Imagem'),
+                        child: const Text('Cortar parte'),
                       );
                     },
                   ),
@@ -186,8 +194,8 @@ class _CortarViewState extends State<CortarView> {
           ),
 
           ElevatedButton  (
-            onPressed: salvarImagem,
-            child: const Text('Salvar imagem'),
+            onPressed: salvarparte,
+            child: const Text('Salvar parte'),
           ),
         ],
       ),
