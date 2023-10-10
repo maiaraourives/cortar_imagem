@@ -193,9 +193,9 @@ class _CortarViewState extends State<CortarView> {
             ),
           ),
 
-          ElevatedButton  (
+          ElevatedButton(
             onPressed: salvarparte,
-            child: const Text('Salvar parte'),
+            child: const Text('Salvar partes'),
           ),
         ],
       ),
