@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -65,14 +64,13 @@ class _CortarViewState extends State<CortarView> {
   }
 
   void salvarImagem() async {
-    // final path = stateView.image!.path;
-    // final bytes = File(path);
+    final partsImages = stateView.partsImages.first;
+    
+    final imageBytes = img.encodePng(partsImages);
+    
+    final uint8List = Uint8List.fromList(imageBytes);
 
-    final imagem = img.encodeCurImages(stateView.partsImages);
-
-    final base64 = base64Encode(imagem);
-
-    final bytes = File(base64); 
+    final bytes = File.fromRawPath(uint8List); 
 
     SalvarImagem.salvarImagem(bytes);
   }
