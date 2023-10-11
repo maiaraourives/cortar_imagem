@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -69,6 +70,11 @@ class _CortarViewState extends State<CortarView> {
 
     for (int i = 0; i < partsImages.length; i ++) {
       if (i < partsImages.length) {
+
+        String? outputFile = await FilePicker.platform.saveFile(
+          dialogTitle: 'Salve seu arquivo no local desejado',
+          fileName: 'parte${i + 1}.png'
+        );
   
         final parte = partsImages[i];
 
@@ -76,9 +82,7 @@ class _CortarViewState extends State<CortarView> {
         
         final uint8List = Uint8List.fromList(imageBytes);
 
-        final bytes = File.fromRawPath(uint8List); 
-
-        SalvarImagem.salvarImagem(bytes);
+        await SalvarImagem.salvarImagem(uint8List, outputFile!);
       }
     }
   }

@@ -1,18 +1,12 @@
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
+import 'dart:typed_data';
+
 class SalvarImagem{
 
-  static Future<String> salvarImagem(File file) async {
+  static Future<String> salvarImagem(Uint8List bytes, String outputFile) async {
 
-    String filename = 'imagem - ${DateTime.now().microsecondsSinceEpoch.toString()}.jpg';
+    File(outputFile).writeAsBytesSync(bytes, flush: true);
 
-    String? outputFile = await FilePicker.platform.saveFile(
-      dialogTitle: 'Salve seu arquivo no local desejado',
-      fileName: filename
-    );
-
-    File(outputFile!).writeAsBytesSync(file.readAsBytesSync());
-
-    return outputFile;
+    return '';
   }
 }
