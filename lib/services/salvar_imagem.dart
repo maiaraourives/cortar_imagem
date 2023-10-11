@@ -1,16 +1,14 @@
 import 'dart:io';
 
-import 'dart:io' as io;
+import 'package:path_provider/path_provider.dart';
 
 class SalvarImagem{
 
   static Future<String> salvarImagem(File file) async {
 
-    // para um arquivo
-    io.File(file.path).exists();
-
-    // // para um diretório
-    // io.Directory(await path).exists();
+    Directory directory = Directory('C:/Users/maiara.ferreira/Documents');
+    
+    if (!await directory.exists()) directory = (await getExternalStorageDirectory())!;
 
     String filename = 'imagem - ${DateTime.now().microsecondsSinceEpoch.toString()}.jpg';
 
