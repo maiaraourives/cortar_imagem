@@ -63,21 +63,16 @@ class _CortarViewState extends State<CortarView> {
   }
 
   void salvarparte() async {
-
     final partsImages = stateView.partsImages;
 
-    for (int i = 0; i < partsImages.length; i ++) {
+    for (int i = 0; i < partsImages.length; i++) {
       if (i < partsImages.length) {
+        String? outputFile = await FilePicker.platform.saveFile(dialogTitle: 'Salve seu arquivo no local desejado', fileName: 'parte${i + 1}.png');
 
-        String? outputFile = await FilePicker.platform.saveFile(
-          dialogTitle: 'Salve seu arquivo no local desejado',
-          fileName: 'parte${i + 1}.png'
-        );
-  
         final parte = partsImages[i];
 
-        final imageBytes = img.encodePng(parte); 
-        
+        final imageBytes = img.encodePng(parte);
+
         final uint8List = Uint8List.fromList(imageBytes);
 
         await SalvarImagem.salvarImagem(uint8List, outputFile!);
@@ -87,13 +82,11 @@ class _CortarViewState extends State<CortarView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text('Cortar Imagem')),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
-
           Row(
             children: [
               Expanded(
@@ -101,7 +94,6 @@ class _CortarViewState extends State<CortarView> {
                   key: formKey,
                   child: Column(
                     children: [
-
                       //Campo para informar o número de linhas
                       CsTextFormField(
                         keyboardType: TextInputType.number,
@@ -132,17 +124,12 @@ class _CortarViewState extends State<CortarView> {
                         },
                         validator: CortarValidator.validateColuna,
                       ),
-
                     ],
                   ),
                 ),
               ),
-
-              
-
               Column(
                 children: [
-
                   //ElevatedButton para selecionar imagem
                   ElevatedButton(
                     onPressed: selectImage,
@@ -169,7 +156,7 @@ class _CortarViewState extends State<CortarView> {
             child: Column(
               children: [
                 Observer(
-                  builder: (_){
+                  builder: (_) {
                     return GridView.builder(
                       shrinkWrap: true,
                       itemCount: stateView.partsImages.length,
@@ -185,11 +172,11 @@ class _CortarViewState extends State<CortarView> {
                         final imageBytes = img.encodePng(partsImages);
 
                         final bytes = Uint8List.fromList(imageBytes);
-                    
+
                         return Image.memory(bytes, fit: BoxFit.fill);
                       },
                     );
-                  }
+                  },
                 ),
               ],
             ),
